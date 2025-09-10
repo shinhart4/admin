@@ -58,10 +58,18 @@ const Niveaux = () => {
     <div className="p-6 space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Niveaux</h1>
-        <button onClick={onCreate} className="px-4 py-2 rounded bg-blue-600 text-white">+ Nouveau niveau</button>
+        <button onClick={onCreate}className="
+    px-4 py-2 rounded
+    bg-gradient-to-r from-gray-900 to-gray-700
+    text-white font-semibold
+    shadow-md
+    transform transition-transform duration-200
+    hover:scale-105
+    hover:from-gray-800 hover:to-gray-600
+  ">+ Nouveau niveau</button>
       </div>
       {loading ? <Loader/> : <Table<Niveau> columns={columns} data={data} onEdit={onEdit} onDelete={onDelete} />}
-      <Modal open={open} title={editing ? `Modifier #${editing.id}` : 'Nouveau niveau'} onClose={() => setOpen(false)}>
+      <Modal  open={open} title={editing ? `Modifier #${editing.id}` : 'Nouveau niveau'} onClose={() => setOpen(false)} >
         <Form initial={editing ?? { nom:'', programme_id:'' }} fields={fields} onSubmit={handleSave} />
       </Modal>
       <ConfirmDialog open={confirm.open} message={`Supprimer le niveau "${confirm.row?.nom}" ?`} onCancel={()=>setConfirm({open:false,row:null})} onConfirm={handleConfirmDelete} />

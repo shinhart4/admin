@@ -124,7 +124,15 @@ render: r => {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Réponses des utilisateurs</h1>
         <button onClick={() => { setEditing(null); setOpenModal(true); }}
-          className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700">+ Nouvelle réponse</button>
+          className="
+    px-4 py-2 rounded
+    bg-gradient-to-r from-gray-900 to-gray-700
+    text-white font-semibold
+    shadow-md
+    transform transition-transform duration-200
+    hover:scale-105
+    hover:from-gray-800 hover:to-gray-600
+  ">+ Nouvelle réponse</button>
       </div>
 
       {loading ? <Loader /> : (
