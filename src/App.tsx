@@ -26,7 +26,7 @@ function App() {
       {/*<Route path="/" element={<Navigate to="/admin" />} />
 
       {/* Route pour la page de connexion */}
-      <Route path="/LoginPage" element={<LoginPage />} />
+      <Route path="/" element={<LoginPage />} />
 
       {/* Routes de l'admin */}
       <Route path="/admin" element={<AdminLayout />}>
