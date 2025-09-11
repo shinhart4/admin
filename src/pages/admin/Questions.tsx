@@ -38,84 +38,81 @@ const Questions = () => {
   useEffect(() => { fetchAll(); }, []);
 
   const columns: Column<Question>[] = [
-  { key: 'id', header: 'ID', className: 'w-16' },
-  {
-    key: 'question_text',
-    header: 'Question',
-    render: r => {
-      const text = r.question_text || '';
-      return (
-        <span title={text}>
-          {text.slice(0, 200)}
-          {text.length > 80 ? '…' : ''}
+    { key: 'id', header: 'ID', className: 'w-16 text-gray-200' },
+    {
+      key: 'question_text',
+      header: 'Question',
+      render: r => {
+        const text = r.question_text || '';
+        return (
+          <span title={text} className="text-gray-100">
+            {text.slice(0, 200)}
+            {text.length > 80 ? '…' : ''}
+          </span>
+        );
+      }
+    },
+    { key: 'question_type', header: 'Type', className: 'text-gray-100' },
+    { key: 'estimated_time', header: 'Temps (s)', className: 'text-gray-100' },
+    // Décommenter si tu veux afficher niveaux, matières, chapitres
+    // {
+    //   key: 'niveau_id',
+    //   header: 'Niveau',
+    //   render: r => niveaux.find(n => n.id === r.niveau_id)?.nom ?? r.niveau_id,
+    //   className: 'text-gray-100'
+    // },
+    // {
+    //   key: 'matiere_id',
+    //   header: 'Matière',
+    //   render: r => matieres.find(m => m.id === r.matiere_id)?.nom ?? r.matiere_id,
+    //   className: 'text-gray-100'
+    // },
+    // {
+    //   key: 'chapitre_id',
+    //   header: 'Chapitre',
+    //   render: r => chapitres.find(c => c.id === r.chapitre_id)?.titre ?? r.chapitre_id,
+    //   className: 'text-gray-100'
+    // },
+    {
+      key: 'answers',
+      header: 'Réponses',
+      render: r => {
+        let answersArray: any[] = [];
+        try {
+          answersArray = typeof r.answers === 'string' ? JSON.parse(r.answers) : r.answers;
+        } catch {
+          return <span className="text-red-500">Format invalide</span>;
+        }
+        if (!Array.isArray(answersArray)) {
+          return <span className="text-red-500">Réponses non valides</span>;
+        }
+        return (
+          <ul className="space-y-1 text-xs">
+            {answersArray.map((ans, idx) => (
+              <li key={idx} className={`px-2 py-1 rounded ${ans.correct ? 'bg-green-700 text-green-100 font-semibold' : 'bg-gray-700 text-gray-200'}`}>
+                {ans.option}
+              </li>
+            ))}
+          </ul>
+        );
+      }
+    },
+    {
+      key: 'explanation',
+      header: 'Explication',
+      render: r => (
+        <span className="text-xs text-white/90 italic max-w-sm line-clamp-2">
+          {r.explanation ? r.explanation.slice(0, 100) + (r.explanation.length > 100 ? '…' : '-') : '-'}
         </span>
-      );
+      )
     }
-  },
-  { key: 'question_type', header: 'Type' },
-  { key: 'estimated_time', header: 'Temps (s)' },
-  // {
-  //   key: 'niveau_id',
-  //   header: 'Niveau',
-  //   render: r => niveaux.find(n => n.id === r.niveau_id)?.nom ?? r.niveau_id
-  // },
-  // {
-  //   key: 'matiere_id',
-  //   header: 'Matière',
-  //   render: r => matieres.find(m => m.id === r.matiere_id)?.nom ?? r.matiere_id
-  // },
-  // {
-  //   key: 'chapitre_id',
-  //   header: 'Chapitre',
-  //   render: r => chapitres.find(c => c.id === r.chapitre_id)?.titre ?? r.chapitre_id
-  // },
-  {
-  key: 'answers',
-  header: 'Réponses',
-  render: r => {
-    let answersArray: any[] = [];
-
-    try {
-      answersArray = typeof r.answers === 'string' ? JSON.parse(r.answers) : r.answers;
-    } catch {
-      return <span className="text-red-500">Format invalide</span>;
-    }
-
-    if (!Array.isArray(answersArray)) {
-      return <span className="text-red-500">Réponses non valides</span>;
-    }
-
-    return (
-      <ul className="space-y-1 text-xs">
-        {answersArray.map((ans, idx) => (
-          <li key={idx} className={`px-2 py-1 rounded ${ans.correct ? 'bg-green-100 text-green-800 font-semibold' : 'bg-gray-100 text-gray-700'}`}>
-            {ans.option}
-          </li>
-        ))}
-      </ul>
-    );
-  }
-},
-  {
-    key: 'explanation',
-    header: 'Explication',
-    render: r => (
-      <span className="text-xs text-gray-700 italic max-w-sm line-clamp-2">
-        {r.explanation ? r.explanation.slice(0, 100) + (r.explanation.length > 100 ? '…' : '') : '-'}
-      </span>
-    )
-  }
-];
-
+  ];
 
   const fields: Field[] = [
     { type: 'textarea', name: 'question_text', label: 'Question', placeholder: 'Énoncé complet' },
     { type: 'select', name: 'question_type', label: 'Type', options: [
       { value: 'mcq', label: 'QCM' }, { value: 'true_false', label: 'Vrai/Faux' }, { value: 'open', label: 'Ouverte' }] },
     { type: 'number', name: 'estimated_time', label: 'Temps estimé (secondes)', placeholder: 'ex: 60' },
-    // { type: 'select', name: 'niveau_id', label: 'Niveau', options: niveaux.map(n => ({ value: n.nom, label: n.nom })) },
-    // { type: 'select', name: 'matiere_id', label: 'Matière', options: matieres.map(m => ({ value: m.id, label: m.nom })) },
-    // { type: 'select', name: 'chapitre_id', label: 'Chapitre', options: chapitres.map(c => ({ value: c.id, label: c.titre })) },
     { type: 'json', name: 'answers', label: 'Réponses (JSON)', placeholder: '{ "type": "mcq", "options": [...] }' },
     { type: 'textarea', name: 'explanation', label: 'Explication (facultatif)' },
   ];
@@ -146,27 +143,25 @@ const Questions = () => {
   return (
     <div className="p-6 space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Questions</h1>
+        <h1 className="text-2xl font-bold text-gray-100">Questions</h1>
         <button onClick={onCreate} className="
-    px-4 py-2 rounded
-    bg-gradient-to-r from-gray-900 to-gray-700
-    text-white font-semibold
-    shadow-md
-    transform transition-transform duration-200
-    hover:scale-105
-    hover:from-gray-800 hover:to-gray-600
-  ">+ Nouvelle question</button>
+          px-4 py-2 rounded
+          bg-gradient-to-r from-gray-900 to-gray-700
+          text-white font-semibold
+          shadow-md
+          transform transition-transform duration-200
+          hover:scale-105
+          hover:from-gray-800 hover:to-gray-600
+        ">+ Nouvelle question</button>
       </div>
 
       {loading ? <Loader /> : (
         <Table<Question> columns={columns} data={data} onEdit={onEdit} onDelete={onDelete} />
       )}
 
-      <Modal open={open} title={editing ? `Modifier #${editing.id}` : 'Ajouter une question'} onClose={() => setOpen(false)} size="xl"
-        footer={null}>
+      <Modal open={open} title={editing ? `Modifier #${editing.id}` : 'Ajouter une question'} onClose={() => setOpen(false)} size="xl" footer={null}>
         <Form
           initial={editing ?? {
-            
             question_text: '', question_type: 'mcq', estimated_time: 60, niveau_id: '', matiere_id: '', chapitre_id: '', answers: {}, explanation: ''
           }}
           fields={fields}

@@ -64,14 +64,14 @@ render: r => {
   key: 'is_correcte',
   header: 'Correcte',
   render: r => r.is_correct 
-            ? <span className="text-green-600 font-bold">✔️</span> 
+            ?<span className="text-green-600 font-bold animate-bell">✔️</span> 
             : <span className="text-red-600 font-bold">❌</span>
 },
     {
   key: 'is_correct',
   header: 'Correcte',
   render: r => r.is_correct
-            ? <span className="text-green-600 font-bold">✔️</span> 
+            ? <span className="text-green-600 font-bold animate-bell">✔️</span>
             : <span className="text-red-600 font-bold">❌</span>
 },
     {
