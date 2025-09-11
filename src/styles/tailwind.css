@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /*Animation cloche*/
 @keyframes bell {
   0%   { transform: rotate(0deg); }

@@ -1,3 +1,4 @@
+// src/App.tsx
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AdminLayout from './layouts/AdminLayout';
 
@@ -16,12 +17,18 @@ import Parametres from './pages/admin/Parametres';
 import UserResponses from './pages/admin/UserResponses';
 import EditPrompt from './pages/EditPrompt';
 
+import LoginPage from './pages/LoginPage'; // <-- ton composant LoginPage
+
 function App() {
   return (
     <Routes>
       {/* Redirige la racine vers /admin */}
-      <Route path="/" element={<Navigate to="/admin" />} />
+      {/*<Route path="/" element={<Navigate to="/admin" />} />
 
+      {/* Route pour la page de connexion */}
+      <Route path="/LoginPage" element={<LoginPage />} />
+
+      {/* Routes de l'admin */}
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Dashboard />} />
         <Route path="programmes" element={<Programmes />} />

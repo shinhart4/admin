@@ -22,11 +22,14 @@
 //   );
 // };
 import { FaSignOutAlt, FaUserCircle } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+
   const handleLogout = () => {
-    localStorage.clear(); // ou Supabase.auth.signOut()
-    window.location.href = '/login';
+    localStorage.clear();
+    navigate('/LoginPage');
   };
 
   return (
