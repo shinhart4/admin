@@ -29,7 +29,7 @@ const Sidebar = () => {
     { to: '/admin/chapitres', label: 'Chapitres', icon: <FaListOl /> },
     { to: '/admin/lecons', label: 'Leçons', icon: <FaListOl /> },
     { to: '/admin/questions', label: 'Questions', icon: <FaQuestion /> },
-    { to: '/admin/UserResponses', label: 'UserResponses', icon: <FaClipboardList /> },
+    { to: '/admin/user-Responses', label: 'UserResponses', icon: <FaClipboardList /> },
     { to: '/admin/eleves', label: 'Élèves', icon: <FaUserGraduate /> },
     { to: '/admin/instructeurs', label: 'Instructeurs', icon: <FaChalkboardTeacher /> },
     { to: '/admin/sessions', label: 'Sessions', icon: <FaHistory /> },

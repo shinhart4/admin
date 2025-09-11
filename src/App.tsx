@@ -2,6 +2,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AdminLayout from './layouts/AdminLayout';
 
+// Pages Admin
 import Dashboard from './pages/admin/Dashboard';
 import Programmes from './pages/admin/Programmes';
 import Niveaux from './pages/admin/Niveaux';
@@ -17,18 +18,23 @@ import Parametres from './pages/admin/Parametres';
 import UserResponses from './pages/admin/UserResponses';
 import EditPrompt from './pages/EditPrompt';
 
-import LoginPage from './pages/LoginPage'; // <-- ton composant LoginPage
+// Pages Auth
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import Forgetpage from './pages/Forgetpage';
 
 function App() {
   return (
     <Routes>
-      {/* Redirige la racine vers /admin */}
-      {/*<Route path="/" element={<Navigate to="/admin" />} />
+      {/* Redirige la racine vers /login */}
+      <Route path="/" element={<Navigate to="/login" replace />} />
 
-      {/* Route pour la page de connexion */}
-      <Route path="/" element={<LoginPage />} />
+      {/* Auth */}
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/forgot-password" element={<Forgetpage />} />
 
-      {/* Routes de l'admin */}
+      {/* Admin */}
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<Dashboard />} />
         <Route path="programmes" element={<Programmes />} />
@@ -42,11 +48,11 @@ function App() {
         <Route path="sessions" element={<Sessions />} />
         <Route path="utilisateurs" element={<Utilisateurs />} />
         <Route path="parametres" element={<Parametres />} />
-        <Route path="UserResponses" element={<UserResponses />} />
+        <Route path="user-responses" element={<UserResponses />} />
         <Route path="edit/:id" element={<EditPrompt />} />
       </Route>
 
-      {/* Route 404 */}
+      {/* 404 */}
       <Route path="*" element={<div className="p-6">Page non trouvée</div>} />
     </Routes>
   );

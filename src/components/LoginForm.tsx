@@ -58,7 +58,7 @@ const LoginForm = () => {
 
         <div className="mt-4 text-gray-400 text-sm text-center">
           <p>
-            Mot de passe oublié ? <span className="text-white cursor-pointer hover:underline">Réinitialiser</span>
+            Mot de passe oublié ? <span className="text-white cursor-pointer hover:underline" onClick={() => navigate('/forgot-password')}>Réinitialiser</span>
           </p>
           <p className="mt-2">
             Pas encore de compte ?{' '}
