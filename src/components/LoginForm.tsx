@@ -21,7 +21,18 @@ const LoginForm = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-white to-black p-4">
       <div className="w-full max-w-md bg-black/70 backdrop-blur-md rounded-2xl shadow-xl p-8 text-white">
-        <h2 className="text-3xl font-bold mb-2 text-center">Wilgo</h2>
+      <h2 className="text-3xl font-bold mb-2 flex items-center justify-center">
+  {/* Texte */}
+  <span className="mr-2">Wilgo</span>
+  
+  {/* Logo */}
+  <img
+    src="/logo.png"   // ⚠️ mets ton fichier dans /public/logo.png
+    alt="Logo Wilgo"
+    className="w-12 h-12 object-contain align-middle"
+  />
+</h2>
+
         <p className="mb-4 text-gray-300 text-center">
           Connectez-vous à votre espace administration
         </p>

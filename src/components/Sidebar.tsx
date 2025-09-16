@@ -40,9 +40,24 @@ const Sidebar = () => {
   return (
     <aside className="w-64 border-r bg-white h-screen sticky top-0">
 <div className="p-4 border-b bg-gradient-to-r from-gray-900 to-gray-700 text-white">
-  <div className="text-2xl font-extrabold tracking-tight">
-    Wilgo Admin
+  <div className="flex items-center justify-between">
+    {/* Titre */}
+    <div className="text-2xl font-extrabold tracking-tight">
+      Wilgo Admin
+    </div>
+
+    {/* Logo */}
+    <img
+      src="/logo.png"   // ⚠️ mets ton fichier dans /public/logo.png
+      alt="Logo Wilgo"
+      className="object-contain"
+      style={{
+        width: "50px",            // taille réduite à 50px
+        transform: "translateX(-15%)"        // léger décalage vers la gauche
+      }}
+    />
   </div>
+
   <div className="text-xs text-gray-300">
     Back-office
   </div>
