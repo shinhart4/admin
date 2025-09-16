@@ -21,32 +21,34 @@
 //     </header>
 //   );
 // };
-
-// export default Header;
 import { FaSignOutAlt, FaUserCircle } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+
   const handleLogout = () => {
-    // À personnaliser selon ton auth
-    localStorage.clear(); // ou Supabase.auth.signOut()
-    window.location.href = '/login';
+    localStorage.clear();
+    navigate('/');
   };
 
   return (
-    <header className="bg-white px-6 py-4 shadow-sm flex justify-between items-center border-b sticky top-0 z-10">
-      <h1 className="text-xl font-semibold text-gray-800">Wilgo Admin Panel</h1>
+    <header className="bg-gradient-to-r from-gray-900 to-gray-700 px-6 py-4 shadow-md flex justify-between items-center sticky top-0 z-10">
+      <h1 className="text-xl font-semibold text-white">Wilgo Admin Panel</h1>
 
       <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2 text-gray-700">
-          <FaUserCircle className="text-2xl text-blue-600" />
-          <span className="text-sm font-medium">Admin</span>
+        <div className="flex items-center gap-2">
+          <FaUserCircle className="text-2xl text-white" />
+          <div className="text-sm text-gray-200">
+            <div className="font-medium">Admin</div>
+          </div>
         </div>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-2 text-red-600 hover:underline"
+          className="flex items-center gap-2 text-red-400 hover:text-red-500 transition-colors"
         >
-          <FaSignOutAlt />
-          <span>Déconnexion</span>
+          <FaSignOutAlt className="text-lg text-white" />
+          <span className="text-white">Déconnexion</span>
         </button>
       </div>
     </header>
