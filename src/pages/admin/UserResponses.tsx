@@ -27,24 +27,22 @@ const UserResponses = () => {
     setResponses(r.data || []);
     setEleves(e.data || []);
     setQuestions(q.data || []);
-    
     setLoading(false);
-   
   };
 
   useEffect(() => { fetchData(); }, []);
 
   const columns: Column<UserResponse>[] = [
-    { key: 'id', header: 'ID', className: 'w-16' },
-   {
-  key: 'user_id',
-header: 'Élève',
-render: r => {
-  const eleve = eleves.find(e => e.id_eleve === r.user_id);
-  return eleve ? eleve.username : r.user_id;
-}}
-,
-      {
+    { key: 'id', header: 'ID', className: 'w-16 text-gray-800' },
+    {
+      key: 'user_id',
+      header: 'Élève',
+      render: r => {
+        const eleve = eleves.find(e => e.id_eleve === r.user_id);
+        return eleve ? eleve.username : r.user_id;
+      }
+    },
+    {
       key: 'question_id',
       header: 'Question',
       render: r => {
@@ -61,19 +59,12 @@ render: r => {
     },
     { key: 'user_answer', header: 'Réponse', render: r => r.user_answer || 'Aucune réponse' },
     {
-  key: 'is_correcte',
-  header: 'Correcte',
-  render: r => r.is_correct 
-            ?<span className="text-green-600 font-bold animate-bell">✔️</span> 
-            : <span className="text-red-600 font-bold">❌</span>
-},
-    {
-  key: 'is_correct',
-  header: 'Correcte',
-  render: r => r.is_correct
-            ? <span className="text-green-600 font-bold animate-bell">✔️</span>
-            : <span className="text-red-600 font-bold">❌</span>
-},
+      key: 'is_correcte',
+      header: 'Correcte',
+      render: r => r.is_correct
+        ? <span className="text-green-600 font-bold animate-bell">✔️</span>
+        : <span className="text-red-600 font-bold">❌</span>
+    },
     {
       key: 'date_reponse',
       header: 'Date de Réponse',
@@ -120,19 +111,24 @@ render: r => {
   };
 
   return (
-    <div className="p-6 space-y-4">
+    <div className="p-6 space-y-4 bg-white">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Réponses des utilisateurs</h1>
+        <h1 className="text-2xl font-bold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-green-300 via-green-500 to-green-700">
+          Réponses des utilisateurs
+        </h1>
         <button onClick={() => { setEditing(null); setOpenModal(true); }}
           className="
-    px-4 py-2 rounded
-    bg-gradient-to-r from-gray-900 to-gray-700
-    text-white font-semibold
-    shadow-md
-    transform transition-transform duration-200
-    hover:scale-105
-    hover:from-gray-800 hover:to-gray-600
-  ">+ Nouvelle réponse</button>
+            px-4 py-2 rounded
+            bg-gradient-to-r from-green-300 via-green-500 to-green-700
+            text-white font-semibold
+            shadow-md
+            transform transition-transform duration-200
+            hover:scale-105
+            hover:from-green-300 hover:to-green-500
+          "
+        >
+          + Nouvelle réponse
+        </button>
       </div>
 
       {loading ? <Loader /> : (

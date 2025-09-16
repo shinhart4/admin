@@ -1,4 +1,3 @@
-// src/pages/admin/Questions.tsx
 import { useEffect, useState } from 'react';
 import { supabase } from '../../supabase';
 import Table from '../../components/Table';
@@ -38,41 +37,22 @@ const Questions = () => {
   useEffect(() => { fetchAll(); }, []);
 
   const columns: Column<Question>[] = [
-    { key: 'id', header: 'ID', className: 'w-16 text-gray-200' },
+    { key: 'id', header: 'ID', className: 'w-16 text-gray-800 font-bold' }, // Amélioration de la couleur du texte de l'ID
     {
       key: 'question_text',
       header: 'Question',
       render: r => {
         const text = r.question_text || '';
         return (
-          <span title={text} className="text-gray-100">
+          <span title={text} className="text-gray-800">
             {text.slice(0, 200)}
             {text.length > 80 ? '…' : ''}
           </span>
         );
       }
     },
-    { key: 'question_type', header: 'Type', className: 'text-gray-100' },
-    { key: 'estimated_time', header: 'Temps (s)', className: 'text-gray-100' },
-    // Décommenter si tu veux afficher niveaux, matières, chapitres
-    // {
-    //   key: 'niveau_id',
-    //   header: 'Niveau',
-    //   render: r => niveaux.find(n => n.id === r.niveau_id)?.nom ?? r.niveau_id,
-    //   className: 'text-gray-100'
-    // },
-    // {
-    //   key: 'matiere_id',
-    //   header: 'Matière',
-    //   render: r => matieres.find(m => m.id === r.matiere_id)?.nom ?? r.matiere_id,
-    //   className: 'text-gray-100'
-    // },
-    // {
-    //   key: 'chapitre_id',
-    //   header: 'Chapitre',
-    //   render: r => chapitres.find(c => c.id === r.chapitre_id)?.titre ?? r.chapitre_id,
-    //   className: 'text-gray-100'
-    // },
+    { key: 'question_type', header: 'Type', className: 'text-gray-800' },
+    { key: 'estimated_time', header: 'Temps (s)', className: 'text-gray-800' },
     {
       key: 'answers',
       header: 'Réponses',
@@ -101,7 +81,7 @@ const Questions = () => {
       key: 'explanation',
       header: 'Explication',
       render: r => (
-        <span className="text-xs text-white/90 italic max-w-sm line-clamp-2">
+        <span className="text-xs text-gray-800 italic max-w-sm line-clamp-2">
           {r.explanation ? r.explanation.slice(0, 100) + (r.explanation.length > 100 ? '…' : '-') : '-'}
         </span>
       )
@@ -141,25 +121,30 @@ const Questions = () => {
   };
 
   return (
-    <div className="p-6 space-y-4">
+    <div className="p-6 space-y-4 bg-white">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-100">Questions</h1>
-        <button onClick={onCreate} className="
-          px-4 py-2 rounded
-          bg-gradient-to-r from-gray-900 to-gray-700
-          text-white font-semibold
-          shadow-md
-          transform transition-transform duration-200
-          hover:scale-105
-          hover:from-gray-800 hover:to-gray-600
-        ">+ Nouvelle question</button>
+        <h1 className="text-2xl font-bold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-green-300 via-green-500 to-green-700">
+          Questions
+        </h1>
+        <button
+          onClick={onCreate}
+          className="px-4 py-2 rounded bg-gradient-to-r from-green-300 via-green-500 to-green-700 text-white font-semibold shadow-md transform transition-transform duration-200 hover:scale-105 hover:from-green-300 hover:to-green-500"
+        >
+          + Nouvelle question
+        </button>
       </div>
 
       {loading ? <Loader /> : (
         <Table<Question> columns={columns} data={data} onEdit={onEdit} onDelete={onDelete} />
       )}
 
-      <Modal open={open} title={editing ? `Modifier #${editing.id}` : 'Ajouter une question'} onClose={() => setOpen(false)} size="xl" footer={null}>
+      <Modal
+        open={open}
+        title={editing ? `Modifier #${editing.id}` : 'Ajouter une question'}
+        onClose={() => setOpen(false)}
+        size="xl"
+        footer={null}
+      >
         <Form
           initial={editing ?? {
             question_text: '', question_type: 'mcq', estimated_time: 60, niveau_id: '', matiere_id: '', chapitre_id: '', answers: {}, explanation: ''

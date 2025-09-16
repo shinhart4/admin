@@ -66,9 +66,9 @@ const AdminManagement = () => {
   };
 
   return (
-    <div className="p-6 space-y-4">
+    <div className="p-6 space-y-4 bg-gradient-to-b from-green-300 via-green-500 to-green-700">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Manage Admins</h1>
+        <h1 className="text-2xl font-bold text-custom-light-brown">Manage Admins</h1>
       </div>
 
       {loading ? <Loader /> : (

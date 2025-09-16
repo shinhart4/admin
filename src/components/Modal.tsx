@@ -1,41 +1,36 @@
 import { ReactNode } from 'react';
 
-type Props = { 
-  open: boolean; 
-  title: string; 
-  onClose: () => void; 
-  children: ReactNode; 
-  footer?: ReactNode; 
-  size?: 'sm'|'md'|'lg'|'xl' 
+type Props = {
+  open: boolean;
+  title: string;
+  onClose: () => void;
+  children: ReactNode;
+  footer?: ReactNode;
 };
 
-const Modal = ({ open, title, onClose, children, footer, size='md' }: Props) => {
+const Modal = ({ open, title, onClose, children, footer }: Props) => {
   if (!open) return null;
-  const sizes = { sm:'max-w-md', md:'max-w-lg', lg:'max-w-2xl', xl:'max-w-4xl' }[size];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm">
-      <div className={`w-full ${sizes} rounded-2xl shadow-2xl overflow-hidden bg-gradient-to-br from-black via-gray-800 to-gray-300 text-white`}>
-        
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm px-4 py-8">
+      <div className="w-full max-w-3xl bg-white rounded-xl shadow-2xl overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-3 border-b border-gray-600">
-          <h3 className="font-semibold text-lg text-gray-100">{title}</h3>
-          <button 
-            onClick={onClose} 
-            className="text-gray-400 hover:text-white hover:scale-110 transition-transform duration-200"
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+          <h3 className="text-xl font-semibold text-[#5C3A00]">{title}</h3>
+          <button
+            onClick={onClose}
+            className="text-gray-500 hover:text-red-500 text-2xl font-bold"
           >
-            ✕
+            ×
           </button>
         </div>
 
         {/* Body */}
-        <div className="p-5">
-          {children}
-        </div>
+        <div className="p-6 text-[#5C3A00] space-y-4">{children}</div>
 
         {/* Footer */}
         {footer && (
-          <div className="px-5 py-3 border-t border-gray-600 bg-gradient-to-br from-black via-gray-800 to-gray-300 text-gray-100">
+          <div className="px-6 py-4 border-t border-gray-200 bg-gray-50 flex justify-end">
             {footer}
           </div>
         )}

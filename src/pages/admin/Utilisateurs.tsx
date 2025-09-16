@@ -101,23 +101,25 @@ const Utilisateurs = () => {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 bg-white">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Gestion des Utilisateurs</h1>
+        <h1 className="text-2xl font-bold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-green-300 via-green-500 to-green-700">
+          Gestion des Utilisateurs
+        </h1>
         <button
           onClick={() => {
             setSelectedUser(null);
             setModalOpen(true);
           }}
-         className="
-    px-4 py-2 rounded
-    bg-gradient-to-r from-gray-900 to-gray-700
-    text-white font-semibold
-    shadow-md
-    transform transition-transform duration-200
-    hover:scale-105
-    hover:from-gray-800 hover:to-gray-600
-  "
+          className="
+            px-4 py-2 rounded
+            bg-gradient-to-r from-green-300 via-green-500 to-green-700
+            text-white font-semibold
+            shadow-md
+            transform transition-transform duration-200
+            hover:scale-105
+            hover:from-green-300 hover:to-green-500
+          "
         >
           + Ajouter
         </button>
@@ -140,24 +142,16 @@ const Utilisateurs = () => {
         />
       )}
 
-       <Modal
-        open={modalOpen} // <-- correction ici
+      <Modal
+        open={modalOpen}
         onClose={handleModalClose}
         title={selectedUser ? 'Modifier Utilisateur' : 'Ajouter un Utilisateur'}
       >
         <Form fields={fields} initialValues={selectedUser || {}} onSubmit={handleSave} />
-        {/* Remplace initialValues par defaultValues si c'est ce que le composant attend */}
       </Modal>
 
       <ConfirmDialog
-        open={confirmOpen} // <-- correction ici
-        onClose={() => setConfirmOpen(false)}
-        onConfirm={handleDelete}
-        message={`Confirmer la suppression de ${selectedUser?.username} ?`}
-      />
-
-      <ConfirmDialog
-        isOpen={confirmOpen}
+        open={confirmOpen}
         onClose={() => setConfirmOpen(false)}
         onConfirm={handleDelete}
         message={`Confirmer la suppression de ${selectedUser?.username} ?`}

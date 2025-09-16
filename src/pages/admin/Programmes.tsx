@@ -3,15 +3,15 @@ import Table from '../../components/Table';
 import Modal from '../../components/Modal';
 import Form, { Field } from '../../components/Form';
 import ConfirmDialog from '../../components/ConfirmDialog';
-import { Programme, Column } from '../../types';
 import Loader from '../../components/Loader';
+import { Programme, Column } from '../../types';
 
 const Programmes = () => {
   const [data, setData] = useState<Programme[]>([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<Programme | null>(null);
-  const [confirm, setConfirm] = useState<{open:boolean; row:Programme|null}>({open:false,row:null});
+  const [confirm, setConfirm] = useState<{ open: boolean; row: Programme | null }>({ open: false, row: null });
 
   const fetchAll = async () => {
     setLoading(true);
@@ -30,21 +30,21 @@ const Programmes = () => {
   useEffect(() => { fetchAll(); }, []);
 
   const columns: Column<Programme>[] = [
-    { key: 'id', header: 'ID', className:'w-16' },
+    { key: 'id', header: 'ID', className: 'w-16' },
     { key: 'name', header: 'Nom' },
     { key: 'description', header: 'Description', render: r => r.description ?? '—' },
   ];
 
   const fields: Field[] = [
-    { type:'text', name:'name', label:'Nom', required:true },
-    { type:'textarea', name:'description', label:'Description' },
+    { type: 'text', name: 'name', label: 'Nom', required: true },
+    { type: 'textarea', name: 'description', label: 'Description' },
   ];
 
   const onCreate = () => { setEditing(null); setOpen(true); };
-  const onEdit = (row:Programme) => { setEditing(row); setOpen(true); };
-  const onDelete = (row:Programme) => setConfirm({open:true,row});
+  const onEdit = (row: Programme) => { setEditing(row); setOpen(true); };
+  const onDelete = (row: Programme) => setConfirm({ open: true, row });
 
-  const handleSave = async (values:any) => {
+  const handleSave = async (values: any) => {
     try {
       if (editing) {
         await fetch(`http://localhost:8000/api/programmes/${editing.id}`, {
@@ -72,7 +72,7 @@ const Programmes = () => {
       await fetch(`http://localhost:8000/api/programmes/${confirm.row.id}`, {
         method: 'DELETE'
       });
-      setConfirm({open:false,row:null});
+      setConfirm({ open: false, row: null });
       await fetchAll();
     } catch (err) {
       console.error('Erreur API:', err);
@@ -80,29 +80,37 @@ const Programmes = () => {
   };
 
   return (
-    <div className="p-6 space-y-4">
+    <div className="p-6 space-y-4 bg-white">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Programmes scolaires</h1>
+        <h1 className="text-2xl font-bold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-green-300 via-green-500 to-green-700">
+          Programmes scolaires
+        </h1>
         <button
           onClick={onCreate}
-          className="
-            px-4 py-2 rounded
-            bg-gradient-to-r from-gray-900 to-gray-700
-            text-white font-semibold
-            shadow-md
-            transform transition-transform duration-200
-            hover:scale-105
-            hover:from-gray-800 hover:to-gray-600
-          "
+          className="px-4 py-2 rounded bg-gradient-to-r from-green-300 via-green-500 to-green-700 text-white font-semibold shadow-md transform transition-transform duration-200 hover:scale-105 hover:from-green-300 hover:to-green-500"
         >
           + Nouveau programme
         </button>
       </div>
-      {loading ? <Loader/> : <Table<Programme> columns={columns} data={data} onEdit={onEdit} onDelete={onDelete} />}
-      <Modal open={open} title={editing ? `Modifier #${editing.id}` : 'Nouveau programme'} onClose={() => setOpen(false)}>
-        <Form initial={editing ?? { name:'', description:'' }} fields={fields} onSubmit={handleSave} />
+
+      {loading ? <Loader /> : <Table<Programme> columns={columns} data={data} onEdit={onEdit} onDelete={onDelete} />}
+
+      {/* Modal pour l'ajout ou la modification d'un programme */}
+      <Modal open={open} title={editing ? `Modifier #${editing.id}` : 'Nouveau programme'} onClose={() => setOpen(false)} size="xl">
+        <Form
+          initial={editing ?? { name: '', description: '' }}
+          fields={fields}
+          onSubmit={handleSave}
+        />
       </Modal>
-      <ConfirmDialog open={confirm.open} message={`Supprimer le programme "${confirm.row?.name}" ?`} onCancel={()=>setConfirm({open:false,row:null})} onConfirm={handleConfirmDelete} />
+
+      {/* Confirmation avant la suppression d'un programme */}
+      <ConfirmDialog
+        open={confirm.open}
+        message={`Supprimer le programme "${confirm.row?.name}" ?`}
+        onCancel={() => setConfirm({ open: false, row: null })}
+        onConfirm={handleConfirmDelete}
+      />
     </div>
   );
 };

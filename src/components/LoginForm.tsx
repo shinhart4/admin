@@ -19,19 +19,16 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-white to-black p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-custom-light-yellow via-custom-orange to-custom-dark-orange p-4">
       <div className="w-full max-w-md bg-black/70 backdrop-blur-md rounded-2xl shadow-xl p-8 text-white">
-      <h2 className="text-3xl font-bold mb-2 flex items-center justify-center">
-  {/* Texte */}
-  <span className="mr-2">Wilgo</span>
-  
-  {/* Logo */}
-  <img
-    src="/logo.png"   // ⚠️ mets ton fichier dans /public/logo.png
-    alt="Logo Wilgo"
-    className="w-12 h-12 object-contain align-middle"
-  />
-</h2>
+        <h2 className="text-3xl font-bold mb-2 flex items-center justify-center text-custom-light-brown">
+          <span className="mr-2">Wilgo</span>
+          <img
+            src="/logo.png" // ⚠️ mets ton fichier dans /public/logo.png
+            alt="Logo Wilgo"
+            className="w-12 h-12 object-contain align-middle"
+          />
+        </h2>
 
         <p className="mb-4 text-gray-300 text-center">
           Connectez-vous à votre espace administration
@@ -48,7 +45,7 @@ const LoginForm = () => {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="p-3 rounded-xl bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white transition"
+            className="p-3 rounded-xl bg-gray-900 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white transition"
             required
           />
           <input
@@ -56,12 +53,12 @@ const LoginForm = () => {
             placeholder="Mot de passe"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="p-3 rounded-xl bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white transition"
+            className="p-3 rounded-xl bg-gray-900 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white transition"
             required
           />
           <button
             type="submit"
-            className="bg-white hover:bg-white-700 p-3 rounded-xl text-black font-semibold transition transform hover:scale-105"
+            className="bg-custom-dark-brown hover:bg-custom-light-brown p-3 rounded-xl text-white font-semibold transition transform hover:scale-105"
           >
             Se connecter
           </button>

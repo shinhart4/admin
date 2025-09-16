@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'; 
 import { supabase } from '../../supabase';
 import StatCard from '../../components/StatCard';
 import { FaQuestionCircle, FaLayerGroup, FaProjectDiagram, FaHistory } from 'react-icons/fa';
@@ -25,41 +25,44 @@ const Dashboard = () => {
   if (loading) return <Loader />;
 
   return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+    <div className="p-6 space-y-6 bg-white">
+      <h1 className="text-2xl font-bold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-green-300 via-green-500 to-green-700">
+        Admin Dashboard
+      </h1>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <StatCard 
-  title="Questions publiées"
-  value={stats.questions}
-  icon={<FaQuestionCircle className="animate-bell text-white" />}
-/>
+          title="Questions publiées"
+          value={stats.questions}
+          icon={<FaQuestionCircle className="animate-bell text-[#5C3A00]" />} // Utilisation de la couleur text-[#5C3A00]
+        />
 
-<StatCard
-  title="Niveaux"
-  value={stats.niveaux}
-  icon={<FaLayerGroup className="animate-bell text-white" />}
-/>
+        <StatCard
+          title="Niveaux"
+          value={stats.niveaux}
+          icon={<FaLayerGroup className="animate-bell text-[#5C3A00]" />} // Utilisation de la couleur text-[#5C3A00]
+        />
 
-<StatCard
-  title="Programmes"
-  value={stats.programmes}
-  icon={<FaProjectDiagram className="animate-bell text-white" />}
-/>
+        <StatCard
+          title="Programmes"
+          value={stats.programmes}
+          icon={<FaProjectDiagram className="animate-bell text-[#5C3A00]" />} // Utilisation de la couleur text-[#5C3A00]
+        />
 
-<StatCard
-  title="Sessions actives"
-  value={stats.sessionsActives}
-  icon={<FaHistory className="animate-bell text-white" />}
-/>
-
+        <StatCard
+          title="Sessions actives"
+          value={stats.sessionsActives}
+          icon={<FaHistory className="animate-bell text-[#5C3A00]" />} // Utilisation de la couleur text-[#5C3A00]
+        />
       </div>
-      <div className="bg-gradient-to-r from-gray-900 to-gray-500 rounded-2xl shadow p-6 text-white">
-  <h2 className="text-lg font-semibold mb-2">Bienvenue</h2>
-  <p className="text-gray-200">
-    Utilise le menu à gauche pour gérer le contenu (programmes, niveaux, matières, chapitres, leçons), la banque de questions, les utilisateurs et les sessions.
-  </p>
-</div>
 
+      <div className="bg-gradient-to-r from-green-300 via-green-500 to-green-700 rounded-2xl shadow p-6 text-white">
+        <h2 className="text-lg font-semibold mb-2  bg-clip-text bg-gradient-to-r text-gray-800">
+          Bienvenue
+        </h2>
+        <p className="text-gray-800">
+          Utilise le menu à gauche pour gérer le contenu (programmes, niveaux, matières, chapitres, leçons), la banque de questions, les utilisateurs et les sessions.
+        </p>
+      </div>
     </div>
   );
 };

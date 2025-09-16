@@ -8,13 +8,13 @@ type Props<T> = {
   actionsExtra?: (row: T) => React.ReactNode;
 };
 
-export default function Table<T extends { id?: number | string }>(
+export default function Table<T extends { id?: number | string }>( 
   { columns, data, onEdit, onDelete, actionsExtra }: Props<T>
 ) {
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-gray-700 to-gray-500 text-white rounded-2xl shadow overflow-x-auto">
+    <div className="bg-white text-black rounded-2xl shadow overflow-x-auto">
       <table className="min-w-full text-sm">
-        <thead className="bg-gray-800 text-gray-200">
+        <thead className="bg-white text-[#5C3A00]">
           <tr>
             {columns.map(c => (
               <th key={String(c.key)} className={`text-left px-3 py-2 ${c.className || ''}`}>
@@ -28,7 +28,7 @@ export default function Table<T extends { id?: number | string }>(
         </thead>
         <tbody>
           {data.map((row, idx) => (
-            <tr key={(row as any).id ?? idx} className="border-t border-gray-600 hover:bg-gray-700/30 transition-colors duration-200">
+            <tr key={(row as any).id ?? idx} className="border-t border-[#5C3A00] hover:bg-[#5C3A00]/20 transition-colors duration-200">
               {columns.map(c => (
                 <td key={String(c.key)} className={`px-3 py-2 ${c.className || ''}`}>
                   {c.render ? c.render(row) : (row as any)[c.key as string]}
@@ -41,7 +41,7 @@ export default function Table<T extends { id?: number | string }>(
                     {onEdit && (
                       <button 
                         onClick={() => onEdit(row)} 
-                        className="px-2 py-1 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 text-white rounded shadow hover:scale-105 transform transition-all duration-200"
+                        className="px-2 py-1 bg-gradient-to-r from-green-300 via-green-500 to-green-700 text-white rounded shadow hover:scale-105 transform transition-all duration-200"
                       >
                         Modifier
                       </button>
@@ -49,7 +49,7 @@ export default function Table<T extends { id?: number | string }>(
                     {onDelete && (
                       <button 
                         onClick={() => onDelete(row)} 
-                        className="px-2 py-1 bg-gradient-to-r from-red-700 via-red-600 to-red-500 text-white rounded shadow hover:scale-105 transform transition-all duration-200"
+                        className="px-2 py-1 bg-gradient-to-r from-red-500 via-red-700 to-red-900 text-white rounded shadow hover:scale-105 transform transition-all duration-200"
                       >
                         Supprimer
                       </button>

@@ -5,10 +5,10 @@ const Forgetpage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-custom-light-yellow via-custom-orange to-custom-dark-orange">
       {/* Background animation */}
       <div className="absolute inset-0">
-        <div className="bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 animate-pulse-slow w-full h-full"></div>
+        <div className="bg-gradient-to-r from-custom-dark-brown via-custom-light-brown to-custom-dark-orange animate-pulse-slow w-full h-full"></div>
       </div>
 
       {/* Form */}

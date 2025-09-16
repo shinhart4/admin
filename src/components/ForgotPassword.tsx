@@ -4,9 +4,9 @@ type Props = {
 
 const ForgotPassword = ({ onBack }: Props) => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-white to-black p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-custom-light-yellow via-custom-orange to-custom-dark-orange p-4">
       <div className="flex flex-col gap-4 w-full max-w-md bg-black/70 backdrop-blur-md rounded-2xl shadow-xl p-6 text-white">
-        <h2 className="text-2xl text-white text-center font-bold mb-4">
+        <h2 className="text-2xl text-custom-light-brown text-center font-bold mb-4">
           Récupération de compte
         </h2>
 
@@ -16,7 +16,7 @@ const ForgotPassword = ({ onBack }: Props) => {
           className="p-3 rounded-xl bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white transition"
         />
 
-        <button className="bg-white hover:bg-gray-200 p-3 rounded-xl text-black font-semibold transition transform hover:scale-105">
+        <button className="bg-gradient-to-r from-green-300 via-green-500 to-green-700 hover:bg-gradient-to-r hover:from-green-400 hover:via-green-600 hover:to-green-800 p-3 rounded-xl text-white font-semibold transition transform hover:scale-105">
           Envoyer
         </button>
 
